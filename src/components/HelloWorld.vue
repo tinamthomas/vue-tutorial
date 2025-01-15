@@ -1,35 +1,28 @@
 <script setup lang="ts">
+import { usePokemon } from '@/composables/usePokemon'
+
+const { data, fetchData } = usePokemon()
+fetchData()
 defineProps<{
   msg: string
 }>()
 
-const headers = [
-  { text: 'Name', value: 'name' },
-  { text: 'Age', value: 'age' },
-]
-
-const items = [
-  { name: 'John', age: 30 },
-  { name: 'Jane', age: 25 },
-]
+const headers = [{ text: 'Name', value: 'name' }]
 </script>
 
 <template>
-  <div class="greetings">
-    <h1 class="text-3xl font-bold underline">Hello world!</h1>
-    <v-container>
-      <v-row>
-        <v-col>
-          <v-card>
-            <v-card-title>Why hello there</v-card-title>
-            <v-card-text> Hello world! </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-    <div class="m-0 w-1/2 m-auto">
-      <v-data-table :headers="headers" :items="items"></v-data-table>
-    </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-card>
+          <v-card-title>Welcome to the world of Pokemon</v-card-title>
+          <v-card-text> Gotta catch em all </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+  <div class="m-0 w-1/2 m-auto">
+    <v-data-table :headers="headers" :items="data ? data.results : []"></v-data-table>
   </div>
 </template>
 <style scoped>
